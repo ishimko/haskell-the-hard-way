@@ -5,10 +5,18 @@ module Main where
     main = do
         print $ evenSum [1, 2, 3]
         print User { lastName = "Shimko", firstName = "Ivan"}
-        print $ treeFromList [4, 2, 1, 3, 6, 5, 7]
+        
+        putStrLn "Enter integers separated by comma to create a tree:"
+        ints <- getIntList
+        print $ treeFromList ints
 
     evenSum :: Integral a => [a] -> a
     evenSum = sum . filter even
+
+    getIntList :: IO [Int]
+    getIntList =  do
+        input <- getLine
+        return $ read ("[" ++ input ++ "]")
 
     data User = User {firstName :: String, lastName :: String }
                     deriving Show
