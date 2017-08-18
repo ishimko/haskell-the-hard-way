@@ -9,7 +9,6 @@ copyright:           2017 Ivan Shimko
 category:            Learning
 build-type:          Simple
 cabal-version:       >=1.10
-extra-source-files:  README.md
 
 executable learning-haskell
   hs-source-dirs:      src
