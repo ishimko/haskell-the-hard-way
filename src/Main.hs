@@ -8,15 +8,22 @@ module Main where
         
         putStrLn "Enter integers separated by comma to create a tree:"
         ints <- getIntList
-        print $ treeFromList ints
+        case ints of
+            Just l  -> print $ treeFromList l
+            Nothing -> putStrLn "Invalid input"
 
     evenSum :: Integral a => [a] -> a
     evenSum = sum . filter even
 
-    getIntList :: IO [Int]
+    getIntList :: IO (Maybe [Int])
     getIntList =  do
         input <- getLine
-        return $ read ("[" ++ input ++ "]")
+        return $ maybeRead ("[" ++ input ++ "]")
+
+    maybeRead :: Read a => String -> Maybe a
+    maybeRead s = case reads s of
+                    [(x, "")] -> Just x
+                    _ -> Nothing
 
     data User = User {firstName :: String, lastName :: String }
                     deriving Show
