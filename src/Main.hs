@@ -38,4 +38,5 @@ module Main where
                             where subtree comparer = treeFromList $ filter (comparer x) xs
                                   subtree :: (a -> a -> Bool) -> BinaryTree a
 
-                                  
+    toKleisli :: Monad m => (a -> b) -> a -> m b
+    toKleisli f = return . f
