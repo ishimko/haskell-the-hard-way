@@ -35,8 +35,12 @@ module Main where
     treeFromList [] = Empty
     treeFromList (x:xs) = Node x (subtree (<))
                                  (subtree (>))
-                            where subtree comparer = treeFromList $ filter (comparer x) xs
-                                  subtree :: (a -> a -> Bool) -> BinaryTree a
+                            where subtree :: (a -> a -> Bool) -> BinaryTree a 
+                                  subtree comparer = treeFromList $ filter (comparer x) xs
+                                  
 
     toKleisli :: Monad m => (a -> b) -> a -> m b
     toKleisli f = return . f
+
+    (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
+    f <=< g = (=<<) f . g
